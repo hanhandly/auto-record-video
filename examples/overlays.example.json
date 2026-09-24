@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "font": {
+    "family": "Segoe UI"
+  },
+  "palette": {
+    "workflow": "#FFCD49",
+    "action": "#37D5FF",
+    "review": "#F74DA6",
+    "result": "#5BF2B7"
+  },
+  "items": [
+    {
+      "id": "step-1-cue",
+      "type": "cue",
+      "startSeconds": 4.5,
+      "endSeconds": 8.0,
+      "color": "workflow",
+      "stage": "STEP 1 / DISCOVERY",
+      "action": "READ-ONLY ANALYSIS",
+      "note": "Use a compact explanation at the edge instead of boxing a large output region."
+    },
+    {
+      "id": "step-1-title-focus",
+      "type": "focus",
+      "startSeconds": 4.5,
+      "endSeconds": 6.3,
+      "color": "workflow",
+      "x": 24,
+      "y": 290,
+      "width": 410,
+      "height": 44
+    }
+  ]
+}

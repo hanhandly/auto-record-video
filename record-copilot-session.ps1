@@ -54,6 +54,7 @@ if (-not (Test-Path -LiteralPath $WorkDirectory -PathType Container)) {
 }
 
 $ffmpegPath = Resolve-ToolPath -CommandName 'ffmpeg' -WinGetPattern 'Gyan.FFmpeg'
+$ffprobePath = Resolve-ToolPath -CommandName 'ffprobe' -WinGetPattern 'Gyan.FFmpeg'
 $null = Resolve-ToolPath -CommandName 'copilot' -WinGetPattern 'GitHub.Copilot'
 $windowsPowerShellPath = Join-Path $PSHOME 'powershell.exe'
 if (-not (Test-Path -LiteralPath $windowsPowerShellPath)) {
@@ -161,5 +162,29 @@ finally {
 }
 
 $video = Get-Item -LiteralPath $OutputPath
+$probeJson = & $ffprobePath `
+    -v error `
+    -show_format `
+    -show_streams `
+    -of json `
+    $OutputPath
+if ($LASTEXITCODE -ne 0) {
+    throw "ffprobe could not validate the recording: $OutputPath"
+}
+$probe = ($probeJson -join [Environment]::NewLine) | ConvertFrom-Json
+$videoStream = @($probe.streams | Where-Object codec_type -eq 'video')[0]
+if (-not $videoStream -or $video.Length -le 0) {
+    throw "The recording is empty or has no video stream: $OutputPath"
+}
+$actualDuration = [double]::Parse(
+    [string]$probe.format.duration,
+    [System.Globalization.CultureInfo]::InvariantCulture
+)
+if ([Math]::Abs($actualDuration - $DurationSeconds) -gt 0.25) {
+    throw "The recording duration is $actualDuration seconds; expected approximately $DurationSeconds seconds."
+}
+
 Write-Host "Recording created: $($video.FullName)"
 Write-Host "Size: $([math]::Round($video.Length / 1KB, 1)) KB"
+Write-Host "Duration: $([math]::Round($actualDuration, 3)) seconds"
+Write-Host "Video: $($videoStream.codec_name), $($videoStream.width)x$($videoStream.height), $($videoStream.avg_frame_rate) fps"

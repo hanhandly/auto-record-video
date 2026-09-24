@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "title": "Example Project Introduction",
+  "slug": "example-project",
+  "language": "en-US",
+  "durationSeconds": 12.0,
+  "voice": "marin",
+  "instructions": "Use polished, natural English. Be clear, concise, and conversational.",
+  "segments": [
+    {
+      "id": 1,
+      "section": "Opening",
+      "startSeconds": 0.4,
+      "endSeconds": 3.8,
+      "targetSpeechSeconds": 2.8,
+      "speed": 1.0,
+      "visual": "Title and project promise",
+      "text": "This project turns a real support need into a repeatable workflow."
+    },
+    {
+      "id": 2,
+      "section": "Demo",
+      "startSeconds": 4.4,
+      "endSeconds": 8.4,
+      "targetSpeechSeconds": 3.3,
+      "speed": 1.0,
+      "visual": "A compact cue identifies the current workflow stage",
+      "text": "The demonstration keeps each action aligned with a short explanation."
+    },
+    {
+      "id": 3,
+      "section": "Close",
+      "startSeconds": 8.8,
+      "endSeconds": 11.6,
+      "targetSpeechSeconds": 2.2,
+      "speed": 1.0,
+      "visual": "Final result and next step",
+      "text": "Every deliverable is validated before it is shared."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "output": {
+    "path": "..\\output\\example-visual-master.mp4",
+    "durationSeconds": 12.0,
+    "width": 1920,
+    "height": 1080,
+    "frameRate": 30,
+    "includeAudio": true,
+    "audioSampleRate": 48000,
+    "audioChannels": 2,
+    "videoCodec": "libx264",
+    "preset": "medium",
+    "crf": 18,
+    "audioBitrate": "192k",
+    "backgroundColor": "black",
+    "fadeInSeconds": 0.2,
+    "fadeOutSeconds": 0.5
+  },
+  "sources": [
+    {
+      "id": "presentation",
+      "path": "C:\\path\\to\\presentation.mp4"
+    },
+    {
+      "id": "demo",
+      "path": "C:\\path\\to\\untouched-demo.mp4"
+    }
+  ],
+  "clips": [
+    {
+      "kind": "motion",
+      "source": "presentation",
+      "sourceStartSeconds": 0.0,
+      "sourceEndSeconds": 4.0,
+      "outputDurationSeconds": 4.0,
+      "audio": "source",
+      "purpose": "Opening presentation"
+    },
+    {
+      "kind": "motion",
+      "source": "demo",
+      "sourceStartSeconds": 18.0,
+      "sourceEndSeconds": 42.0,
+      "outputDurationSeconds": 6.0,
+      "audio": "mute",
+      "purpose": "Representative workflow at 4x speed"
+    },
+    {
+      "kind": "freeze",
+      "source": "demo",
+      "sourceAtSeconds": 42.0,
+      "outputDurationSeconds": 2.0,
+      "audio": "mute",
+      "purpose": "Readability hold"
+    }
+  ],
+  "overlayManifests": [
+    "..\\output\\overlays\\overlay-manifest.json"
+  ]
+}

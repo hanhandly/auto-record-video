@@ -1,5 +1,7 @@
 [CmdletBinding()]
-param()
+param(
+    [switch]$IncludeAzureCli
+)
 
 $ErrorActionPreference = 'Stop'
 
@@ -25,6 +27,14 @@ $packages = @(
     }
 )
 
+if ($IncludeAzureCli) {
+    $packages += @{
+        Command = 'az'
+        Id = 'Microsoft.AzureCLI'
+        Name = 'Azure CLI'
+    }
+}
+
 foreach ($package in $packages) {
     if (Get-Command $package.Command -ErrorAction SilentlyContinue) {
         Write-Host "$($package.Name) is already installed."
@@ -48,3 +58,7 @@ foreach ($package in $packages) {
 Write-Host ''
 Write-Host 'Prerequisites are installed. Open a new PowerShell 7 window so PATH changes take effect.'
 Write-Host 'Run "copilot", then use /login if authentication is required.'
+if (-not $IncludeAzureCli) {
+    Write-Host 'Azure CLI is optional. Re-run with -IncludeAzureCli only when using the Azure OpenAI TTS adapter.'
+}
+Write-Host 'Microsoft PowerPoint is optional and is required only for PowerPoint export tools.'

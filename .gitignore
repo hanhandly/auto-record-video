@@ -11,6 +11,20 @@ output/
 *.log
 *.tmp
 *.jsonl
+*.filter.txt
+*.capture-manifest.json
+*.build-manifest.json
+*.qc-manifest.json
+*.voiceover-manifest.json
+*.powerpoint-manifest.json
+artifacts/
+test-output/
+
+# Generated Python state is never required by this PowerShell toolkit
+.venv/
+venv/
+__pycache__/
+*.pyc
 
 # Local settings and secrets
 .env
